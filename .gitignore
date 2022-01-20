@@ -1,0 +1,15 @@
+# files
+photos
+*.jpg
+*.png
+
+# virtual environment
+env
+venv
+
+# ide staff
+.idea
+
+# pycache
+__pycache__
+
