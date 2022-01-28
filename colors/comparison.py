@@ -3,16 +3,30 @@ import math
 import colour
 
 
-class DeltaE:
+class ColorCollation:
+    @classmethod
+    def prepare(cls, color):
+        """
+        Prepare color for further comparison
+        :param color: rgb color in list
+        :return: prepared color in hashable format
+        """
+        return color
+
+
+class DeltaE(ColorCollation):
+    @classmethod
+    def prepare(cls, color):
+        lab = colour.XYZ_to_Lab(colour.sRGB_to_XYZ(color))
+        return tuple(lab)
+
     @classmethod
     def compare(cls, color1, color2):
-        lab1 = colour.XYZ_to_Lab(colour.sRGB_to_XYZ(color1))
-        lab2 = colour.XYZ_to_Lab(colour.sRGB_to_XYZ(color2))
-        delta_e = colour.delta_E(lab1, lab2)
+        delta_e = colour.delta_E(color1, color2)
         return delta_e
 
 
-class EuclideanDistance:
+class EuclideanDistance(ColorCollation):
     @classmethod
     def compare(cls, color1, color2):
         r_difference = color2[0] - color1[0]

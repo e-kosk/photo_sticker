@@ -1,4 +1,4 @@
-from PIL import ImageFilter, Image
+from PIL import ImageFilter
 
 
 class ColorPicker:
@@ -25,7 +25,7 @@ class ResizePicker(ColorPicker):
     def get_color(cls, image):
         transformed = image.resize((1, 1))
         rgb = transformed.getpixel((0, 0))
-        return tuple(rgb)
+        return rgb
 
 
 class PickerFactory:

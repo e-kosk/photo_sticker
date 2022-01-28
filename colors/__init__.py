@@ -15,10 +15,12 @@ class ColorPalette:
         self.prepare()
 
     def prepare(self):
+        print('Preparing...')
         for i, image_name in enumerate(os.listdir(self.path)):
             image_path = os.path.join(self.path, image_name)
             image = Image.open(image_path)
             color = self.picker.get_color(image)
+            color = self.collation.prepare(color)
             self.data[color] = image.filename
 
     def get(self, lab):
